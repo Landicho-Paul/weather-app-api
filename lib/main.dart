@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -28,6 +29,10 @@ class _mainpageState extends State<mainpage> {
   String city = "";
   String country = "";
   String humidity = "";
+  String speed = "";
+  String temp_min = "";
+  String  temp_max = "";
+
 
   void initState() {
     // TODO: implement initState
@@ -52,6 +57,9 @@ class _mainpageState extends State<mainpage> {
         city = weatherdata['name'].toString();
         country = weatherdata['sys']['country'].toString();
         humidity = weatherdata['main']['humidity'].toString() + "%";
+        temp_max = weatherdata['main']['temp_max'].toStrng();
+        speed = weatherdata['wind']['speed'].toString();
+        temp_min = weatherdata['main']['temp_min'].toString();
       });
       print(weatherdata['weather'][0]['description']);
     }
@@ -63,6 +71,9 @@ class _mainpageState extends State<mainpage> {
         city = "--";
         country = "--";
         humidity = "--";
+        speed = "--";
+        temp_min = "--";
+        temp_max = "--";
       });
       print(weatherdata['cod']);
     }
@@ -224,11 +235,11 @@ class _mainpageState extends State<mainpage> {
                       ],
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(20),
+                      padding: EdgeInsets.fromLTRB(90,20,90,20),
                       child: Column(
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Temperature :',
@@ -244,7 +255,7 @@ class _mainpageState extends State<mainpage> {
                             ],
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Humidity  :',
@@ -260,7 +271,7 @@ class _mainpageState extends State<mainpage> {
                             ],
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Country  :',
@@ -279,7 +290,90 @@ class _mainpageState extends State<mainpage> {
                       ),
                     ),
                   ),
-                )
+                ),
+                //secomd
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxWidth: maxWidth,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.deepPurpleAccent,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(50.0),
+                      color: Colors.deepPurpleAccent,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white,
+                          blurRadius: 1.0,
+                          spreadRadius: 1.0,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(90,20,90,20),
+                      child: Column(
+
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                            children: [
+
+                              Text(
+                                'Speed :',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                              SizedBox(width: 20),
+                              Text(
+                                speed,
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Temp Minimum  :',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                              SizedBox(width: 20),
+                              Text(
+                                temp_min+"°",
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Temp Maximum  :',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                              SizedBox(width: 20),
+                              Text(
+                                temp_max+"°",
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )//dito
               ],
             ),
           );
